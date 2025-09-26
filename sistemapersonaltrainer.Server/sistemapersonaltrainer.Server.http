@@ -1,0 +1,6 @@
+@sistemapersonaltrainer.Server_HostAddress = http://localhost:5010
+
+GET {{sistemapersonaltrainer.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
