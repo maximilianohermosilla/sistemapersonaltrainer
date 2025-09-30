@@ -2,7 +2,7 @@
 
 namespace sistemapersonaltrainer.Server.Models
 {
-    public class CombinationExcercise
+    public class CombinationExercise
     {
         [Key]
         public int Id { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace sistemapersonaltrainer.Server.DTOs
 {
-    public class EquipmentCreateDTO
+    public class ForceTypeReadDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;

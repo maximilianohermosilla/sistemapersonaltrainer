@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace sistemapersonaltrainer.Server.Models
 {
@@ -28,7 +27,7 @@ namespace sistemapersonaltrainer.Server.Models
         public int? LoadPositionEndId { get; set; } = null;
         public int? ExerciseLegModeId { get; set; } = null;
         public int? FootElevationId { get; set; } = null;
-        public int? CombinationExcerciseId { get; set; } = null;
+        public int? CombinationExerciseId { get; set; } = null;
         public int? PrimaryPatternId { get; set; } = null;
         public int? SecondaryPatternId { get; set; } = null;
         public int? TertiaryPatternId { get; set; } = null;
@@ -55,7 +54,7 @@ namespace sistemapersonaltrainer.Server.Models
         public LoadPositionEnd? LoadPositionEnd { get; set; } = null;
         public ExerciseMode? ExerciseLegMode { get; set; } = null;
         public FootElevation? FootElevation { get; set; } = null;
-        public CombinationExcercise? CombinationExcercise { get; set; } = null;
+        public CombinationExercise? CombinationExercise { get; set; } = null;
         public Pattern? PrimaryPattern { get; set; } = null;
         public Pattern? SecondaryPattern { get; set; } = null;
         public Pattern? TertiaryPattern { get; set; } = null;

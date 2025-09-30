@@ -1,6 +1,6 @@
 ﻿namespace sistemapersonaltrainer.Server.DTOs
 {
-    public class EquipmentCreateDTO
+    public class GripCreateDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;

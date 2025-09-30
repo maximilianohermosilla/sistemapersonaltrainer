@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace sistemapersonaltrainer.Server.DTOs
+﻿namespace sistemapersonaltrainer.Server.DTOs
 {
     public class CustomerCreateDTO
     {
-        [Key]
         public int Id { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string? LastName { get; set; } = null;

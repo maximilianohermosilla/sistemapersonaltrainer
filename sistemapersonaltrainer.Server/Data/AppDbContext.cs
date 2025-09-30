@@ -7,13 +7,13 @@ namespace sistemapersonaltrainer.Server.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<BodyRegion> BodyRegions { get; set; }
-        public DbSet<CombinationExcercise> CombinationExcercises { get; set; }
+        public DbSet<CombinationExercise> CombinationExercises { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<DifficultyLevel> DifficultyLevels { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<ExerciseArmType> ExerciseArmTypes { get; set; }
-        public DbSet<ExerciseClassification> ExcerciseCalifications { get; set; }
+        public DbSet<ExerciseClassification> ExerciseCalifications { get; set; }
         public DbSet<ExerciseMode> ExerciseModes { get; set; }
         public DbSet<FootElevation> FootElevations { get; set; }
         public DbSet<ForceType> ForceTypes { get; set; }
@@ -50,7 +50,7 @@ namespace sistemapersonaltrainer.Server.Data
                 entity.HasOne(i => i.LoadPositionEnd).WithMany(i => i.Exercises).HasForeignKey(i => i.LoadPositionEndId).OnDelete(DeleteBehavior.NoAction);
                 entity.HasOne(i => i.ExerciseLegMode).WithMany(i => i.Exercises).HasForeignKey(i => i.ExerciseLegModeId).OnDelete(DeleteBehavior.NoAction);
                 entity.HasOne(i => i.FootElevation).WithMany(i => i.Exercises).HasForeignKey(i => i.FootElevationId).OnDelete(DeleteBehavior.NoAction);
-                entity.HasOne(i => i.CombinationExcercise).WithMany(i => i.Exercises).HasForeignKey(i => i.CombinationExcerciseId).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(i => i.CombinationExercise).WithMany(i => i.Exercises).HasForeignKey(i => i.CombinationExerciseId).OnDelete(DeleteBehavior.NoAction);
                 entity.HasOne(i => i.PrimaryPattern).WithMany(i => i.Exercises).HasForeignKey(i => i.PrimaryPatternId).OnDelete(DeleteBehavior.NoAction);
                 entity.HasOne(i => i.SecondaryPattern).WithMany(i => i.Exercises).HasForeignKey(i => i.SecondaryPatternId).OnDelete(DeleteBehavior.NoAction);
                 entity.HasOne(i => i.TertiaryPattern).WithMany(i => i.Exercises).HasForeignKey(i => i.TertiaryPatternId).OnDelete(DeleteBehavior.NoAction);
@@ -67,6 +67,7 @@ namespace sistemapersonaltrainer.Server.Data
             modelBuilder.Entity<Workout>(entity =>
             {
                 entity.HasOne(i => i.Customer).WithMany(i => i.Workouts).HasForeignKey(i => i.CustomerId).OnDelete(DeleteBehavior.NoAction);
+                entity.HasOne(i => i.User).WithMany(i => i.Workouts).HasForeignKey(i => i.UserId).OnDelete(DeleteBehavior.NoAction);
                 entity.HasMany(i => i.WorkoutActivities).WithOne(i => i.Workout).HasForeignKey(i => i.WorkoutId).OnDelete(DeleteBehavior.NoAction);
             });
 
