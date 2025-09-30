@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace sistemapersonaltrainer.Server.Models
+namespace sistemapersonaltrainer.Server.DTOs
 {
-    public class Customer
+    public class CustomerCreateDTO
     {
         [Key]
         public int Id { get; set; }
@@ -14,7 +14,5 @@ namespace sistemapersonaltrainer.Server.Models
         public decimal? Weight { get; set; } = null;
         public decimal? Height { get; set; } = null;
         public decimal? IMC { get; set; } = null;
-
-        public virtual ICollection<Workout> Workouts { get; set; } = new List<Workout>();
     }
 }
