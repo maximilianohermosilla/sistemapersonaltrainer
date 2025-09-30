@@ -13,5 +13,7 @@ namespace sistemapersonaltrainer.Server.Models
         public string Password { get; set; } = string.Empty;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public bool Enabled { get; set; } = true;
+
+        public virtual ICollection<Workout> Workouts { get; set; } = new List<Workout>();
     }
 }
