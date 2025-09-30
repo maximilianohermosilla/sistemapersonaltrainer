@@ -9,6 +9,8 @@ namespace sistemapersonaltrainer.Server.Models
         [Required]
         public string Name { get; set; } = null!;
         public string? Description { get; set; } = null!;
-        public virtual ICollection<Exercise> Exercises { get; set; } = new List<Exercise>();
+        public virtual ICollection<Exercise> PrimeMoverExercises { get; set; } = new List<Exercise>();
+        public virtual ICollection<Exercise> SecondaryMoverExercises { get; set; } = new List<Exercise>();
+        public virtual ICollection<Exercise> TertiaryMoverExercises { get; set; } = new List<Exercise>();
     }
 }

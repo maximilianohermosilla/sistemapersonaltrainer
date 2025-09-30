@@ -1,0 +1,42 @@
+﻿namespace sistemapersonaltrainer.Server.Enums
+{
+    enum PostureEnum
+    {
+        _9090Seated = 1,
+        Bridge = 2,
+        HalfKneeling = 3,
+        Hanging = 4,
+        HorseStance = 5,
+        Inverted = 6,
+        IsometricSplitSquat = 7,
+        KneeHoverQuadruped = 8,
+        KneeOverToeSplitSquat = 9,
+        KneeSupported = 10,
+        Kneeling = 11,
+        LSit = 12,
+        March = 13,
+        Other = 14,
+        Prone = 15,
+        Quadruped = 16,
+        Running = 17,
+        Seated = 18,
+        SeatedFloor = 19,
+        ShinBoxSeated = 20,
+        SideLying = 21,
+        SidePlank = 22,
+        SingleLegBridge = 23,
+        SingleLegStanding = 24,
+        SingleLegStandingBentKnee = 25,
+        SingleLegSupported = 26,
+        SplitSquat = 27,
+        StaggeredStance = 28,
+        Standing = 29,
+        Supine = 30,
+        TallKneeling = 31,
+        ToeBalance = 32,
+        TuckLSit = 33,
+        VSitSeated = 34,
+        Walking = 35,
+        WallSit = 36
+    }
+}

@@ -8,7 +8,7 @@ namespace sistemapersonaltrainer.Server.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; } = null!;
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; } = null!;
         public string? UrlShortVideo { get; set; } = null;
         public string? UrlLongVideo { get; set; } = null;
         public int? DifficultyLevelId { get; set; } = null;

@@ -87,7 +87,6 @@ namespace sistemapersonaltrainer.Server.Profiles
 
             config.CreateMap<WorkoutActivityExercise, WorkoutActivityExerciseReadDTO>().ReverseMap();
             config.CreateMap<WorkoutActivityExercise, WorkoutActivityExerciseCreateDTO>().ReverseMap();
-
         }
     }
 }

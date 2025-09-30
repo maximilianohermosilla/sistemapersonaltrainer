@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using sistemapersonaltrainer.Server.Data;
 using sistemapersonaltrainer.Server.Data.Interfaces;
 using sistemapersonaltrainer.Server.Data.Repositories;
+using sistemapersonaltrainer.Server.Helpers;
 using sistemapersonaltrainer.Server.Profiles;
 using sistemapersonaltrainer.Server.Responses.Interfaces;
 using sistemapersonaltrainer.Server.Responses.Services;
@@ -139,6 +140,12 @@ using (var scope = app.Services.CreateScope())
     try
     {
         context.Database.Migrate();
+        if (!context!.Exercises!.Any())
+        {
+            ExercisesHelper exercisesHelper = new ExercisesHelper();
+            context!.Exercises!.AddRange(exercisesHelper.exercisesList);
+            context!.SaveChanges();
+        }
     }
     catch (Exception ex)
     {

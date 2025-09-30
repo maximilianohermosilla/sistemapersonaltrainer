@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace sistemapersonaltrainer.Server.Profiles
+namespace sistemapersonaltrainer.Server.Helpers
 {
     public class CustomUnsupportedMediaTypeMiddleware
     {
