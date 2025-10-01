@@ -29,6 +29,8 @@ namespace sistemapersonaltrainer.Server.Data.Repositories
         public IEnumerable<Exercise> GetAll()
         {
             return vGblContext.Exercises
+                .Include(e => e.MuscleGroup)
+                .Include(e => e.PrimeMoverMuscle)
                 .Include(e => e.DifficultyLevel)
                 .Include(e => e.ExerciseClassification)
                 .ToList();

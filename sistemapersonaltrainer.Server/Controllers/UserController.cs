@@ -37,5 +37,25 @@ namespace sistemapersonaltrainer.Server.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<UserReadDTO>> Login([FromBody] UserLoginDTO pUserLogin)
+        {
+            try
+            {
+                var vUser = await vGblService.GetByUserNamePassword(pUserLogin.UserName, pUserLogin.Password);
+
+                if (vUser == null)
+                {
+                    return NotFound(new UserLoginReadDTO() { Mensaje = "Credenciales incorrectas" });
+                }
+
+                return Ok(new UserLoginReadDTO() { Mensaje = "Usuario registrado correctamente", Token = vUser.Token });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new UserLoginReadDTO() { Mensaje = ex.Message });
+            }
+        }
     }
 }
