@@ -6,31 +6,31 @@ namespace sistemapersonaltrainer.Server.Data
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-        public DbSet<BodyRegion>? BodyRegions { get; set; }
-        public DbSet<CombinationExercise>? CombinationExercises { get; set; }
-        public DbSet<Customer>? Customers { get; set; }
-        public DbSet<Models.DifficultyLevel>? DifficultyLevels { get; set; }
-        public DbSet<Equipment>? Equipments { get; set; }
-        public DbSet<Exercise>? Exercises { get; set; }
-        public DbSet<ExerciseArmType>? ExerciseArmTypes { get; set; }
-        public DbSet<ExerciseClassification>? ExerciseClassifications { get; set; }
-        public DbSet<ExerciseMode>? ExerciseModes { get; set; }
-        public DbSet<FootElevation>? FootElevations { get; set; }
-        public DbSet<ForceType>? ForceTypes { get; set; }
-        public DbSet<Grip>? Grips { get; set; }
-        public DbSet<Laterality>? Lateralities { get; set; }
-        public DbSet<LoadPositionEnd>? LoadPositionEnds { get; set; }
-        public DbSet<Mechanic>? Mechanics { get; set; }
-        public DbSet<Muscle>? Muscles { get; set; }
-        public DbSet<MuscleGroup>? MuscleGroups { get; set; }
-        public DbSet<Parameter>? Parameters { get; set; }
-        public DbSet<Pattern>? Patterns { get; set; }
-        public DbSet<PlaneOfMotion>? PlaneOfMotions { get; set; }
-        public DbSet<Posture>? Postures { get; set; }
-        public DbSet<User>? Users { get; set; }
-        public DbSet<Workout>? Workouts { get; set; }
-        public DbSet<WorkoutActivity>? WorkoutActivities { get; set; }
-        public DbSet<WorkoutActivityExercise>? WorkoutActivityExercises { get; set; }
+        public DbSet<BodyRegion> BodyRegions { get; set; }
+        public DbSet<CombinationExercise> CombinationExercises { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Models.DifficultyLevel> DifficultyLevels { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
+        public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<ExerciseArmType> ExerciseArmTypes { get; set; }
+        public DbSet<ExerciseClassification> ExerciseClassifications { get; set; }
+        public DbSet<ExerciseMode> ExerciseModes { get; set; }
+        public DbSet<FootElevation> FootElevations { get; set; }
+        public DbSet<ForceType> ForceTypes { get; set; }
+        public DbSet<Grip> Grips { get; set; }
+        public DbSet<Laterality> Lateralities { get; set; }
+        public DbSet<LoadPositionEnd> LoadPositionEnds { get; set; }
+        public DbSet<Mechanic> Mechanics { get; set; }
+        public DbSet<Muscle> Muscles { get; set; }
+        public DbSet<MuscleGroup> MuscleGroups { get; set; }
+        public DbSet<Parameter> Parameters { get; set; }
+        public DbSet<Pattern> Patterns { get; set; }
+        public DbSet<PlaneOfMotion> PlaneOfMotions { get; set; }
+        public DbSet<Posture> Postures { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Workout> Workouts { get; set; }
+        public DbSet<WorkoutActivity> WorkoutActivities { get; set; }
+        public DbSet<WorkoutActivityExercise> WorkoutActivityExercises { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -135,48 +135,48 @@ namespace sistemapersonaltrainer.Server.Data
             );
 
             modelBuilder.Entity<Muscle>().HasData(
-                new Muscle { Id = 1, Name = "Adductor Magnus", Description = "Adductor Magnus" },
-                new Muscle { Id = 2, Name = "Anterior Deltoids", Description = "Anterior Deltoids" },
-                new Muscle { Id = 3, Name = "Biceps Brachii", Description = "Biceps Brachii" },
-                new Muscle { Id = 4, Name = "Biceps Femoris", Description = "Biceps Femoris" },
-                new Muscle { Id = 5, Name = "Brachialis", Description = "Brachialis" },
-                new Muscle { Id = 6, Name = "Brachioradialis", Description = "Brachioradialis" },
-                new Muscle { Id = 7, Name = "Erector Spinae", Description = "Erector Spinae" },
-                new Muscle { Id = 8, Name = "Extensor Hallucis Longus", Description = "Extensor Hallucis Longus" },
-                new Muscle { Id = 9, Name = "Flexor Carpi Radialis", Description = "Flexor Carpi Radialis" },
-                new Muscle { Id = 10, Name = "Gastrocnemius", Description = "Gastrocnemius" },
-                new Muscle { Id = 11, Name = "Gluteus Maximus", Description = "Gluteus Maximus" },
-                new Muscle { Id = 12, Name = "Gluteus Medius", Description = "Gluteus Medius" },
-                new Muscle { Id = 13, Name = "Gluteus Minimus", Description = "Gluteus Minimus" },
-                new Muscle { Id = 14, Name = "Iliopsoas", Description = "Iliopsoas" },
-                new Muscle { Id = 15, Name = "Latissimus Dorsi", Description = "Latissimus Dorsi" },
-                new Muscle { Id = 16, Name = "Obliques", Description = "Obliques" },
-                new Muscle { Id = 17, Name = "Pectoralis Major", Description = "Pectoralis Major" },
-                new Muscle { Id = 18, Name = "Posterior Deltoids", Description = "Posterior Deltoids" },
-                new Muscle { Id = 19, Name = "Quadriceps Femoris", Description = "Quadriceps Femoris" },
-                new Muscle { Id = 20, Name = "Rectus Abdominis", Description = "Rectus Abdominis" },
-                new Muscle { Id = 21, Name = "Rectus Femoris", Description = "Rectus Femoris" },
-                new Muscle { Id = 22, Name = "Rhomboids", Description = "Rhomboids" },
-                new Muscle { Id = 23, Name = "Serratus Anterior", Description = "Serratus Anterior" },
-                new Muscle { Id = 24, Name = "Soleus", Description = "Soleus" },
-                new Muscle { Id = 25, Name = "Tensor Fasciae Latae", Description = "Tensor Fasciae Latae" },
-                new Muscle { Id = 26, Name = "Teres Major", Description = "Teres Major" },
-                new Muscle { Id = 27, Name = "Teres Minor", Description = "Teres Minor" },
-                new Muscle { Id = 28, Name = "Tibialis Anterior", Description = "Tibialis Anterior" },
-                new Muscle { Id = 29, Name = "Tibialis Posterior", Description = "Tibialis Posterior" },
-                new Muscle { Id = 30, Name = "Transverse Abdominis", Description = "Transverse Abdominis" },
-                new Muscle { Id = 31, Name = "Trapezius", Description = "Trapezius" },
-                new Muscle { Id = 32, Name = "Triceps Brachii", Description = "Triceps Brachii" },
-                new Muscle { Id = 33, Name = "Upper Trapezius", Description = "Upper Trapezius" },
-                new Muscle { Id = 34, Name = "Lateral Deltoids", Description = "Lateral Deltoids" },
-                new Muscle { Id = 35, Name = "Anconeus", Description = "Anconeus" },
-                new Muscle { Id = 36, Name = "Infraspinatus", Description = "Infraspinatus" },
-                new Muscle { Id = 37, Name = "Levator Scapulae", Description = "Levator Scapulae" },
-                new Muscle { Id = 38, Name = "Extensor Digitorum Longus", Description = "Extensor Digitorum Longus" },
-                new Muscle { Id = 39, Name = "Supraspinatus", Description = "Supraspinatus" },
-                new Muscle { Id = 40, Name = "Medial Deltoids", Description = "Medial Deltoids" },
-                new Muscle { Id = 41, Name = "Subscapularis", Description = "Subscapularis" },
-                new Muscle { Id = 42, Name = "Vastus Mediais", Description = "Vastus Mediais" }
+                new Muscle { Id = 1, Name = "Adductor Magnus", Description = "Aductor Mayor" },
+                new Muscle { Id = 2, Name = "Anterior Deltoids", Description = "Deltoides Anterior" },
+                new Muscle { Id = 3, Name = "Biceps Brachii", Description = "Bíceps Braquial" },
+                new Muscle { Id = 4, Name = "Biceps Femoris", Description = "Bíceps Femoral" },
+                new Muscle { Id = 5, Name = "Brachialis", Description = "Braquial" },
+                new Muscle { Id = 6, Name = "Brachioradialis", Description = "Braquiorradial" },
+                new Muscle { Id = 7, Name = "Erector Spinae", Description = "Erector de la Columna" },
+                new Muscle { Id = 8, Name = "Extensor Hallucis Longus", Description = "Extensor Largo del Dedo Gordo" },
+                new Muscle { Id = 9, Name = "Flexor Carpi Radialis", Description = "Flexor Radial del Carpo" },
+                new Muscle { Id = 10, Name = "Gastrocnemius", Description = "Gastrocnemio" },
+                new Muscle { Id = 11, Name = "Gluteus Maximus", Description = "Glúteo Mayor" },
+                new Muscle { Id = 12, Name = "Gluteus Medius", Description = "Glúteo Medio" },
+                new Muscle { Id = 13, Name = "Gluteus Minimus", Description = "Glúteo Menor" },
+                new Muscle { Id = 14, Name = "Iliopsoas", Description = "Psoas Iliaco" },
+                new Muscle { Id = 15, Name = "Latissimus Dorsi", Description = "Dorsal Ancho" },
+                new Muscle { Id = 16, Name = "Obliques", Description = "Oblicuos" },
+                new Muscle { Id = 17, Name = "Pectoralis Major", Description = "Pectoral Mayor" },
+                new Muscle { Id = 18, Name = "Posterior Deltoids", Description = "Deltoides Posterior" },
+                new Muscle { Id = 19, Name = "Quadriceps Femoris", Description = "Cuádriceps Femoral" },
+                new Muscle { Id = 20, Name = "Rectus Abdominis", Description = "Recto Abdominal" },
+                new Muscle { Id = 21, Name = "Rectus Femoris", Description = "Recto Femoral" },
+                new Muscle { Id = 22, Name = "Rhomboids", Description = "Romboides" },
+                new Muscle { Id = 23, Name = "Serratus Anterior", Description = "Serrato Anterior" },
+                new Muscle { Id = 24, Name = "Soleus", Description = "Sóleo" },
+                new Muscle { Id = 25, Name = "Tensor Fasciae Latae", Description = "Tensor de la Fascia Lata" },
+                new Muscle { Id = 26, Name = "Teres Major", Description = "Redondo Mayor" },
+                new Muscle { Id = 27, Name = "Teres Minor", Description = "Redondo Menor" },
+                new Muscle { Id = 28, Name = "Tibialis Anterior", Description = "Tibial Anterior" },
+                new Muscle { Id = 29, Name = "Tibialis Posterior", Description = "Tibial Posterior" },
+                new Muscle { Id = 30, Name = "Transverse Abdominis", Description = "Transverso del Abdomen" },
+                new Muscle { Id = 31, Name = "Trapezius", Description = "Trapecio" },
+                new Muscle { Id = 32, Name = "Triceps Brachii", Description = "Tríceps Braquial" },
+                new Muscle { Id = 33, Name = "Upper Trapezius", Description = "Trapecio Superior" },
+                new Muscle { Id = 34, Name = "Lateral Deltoids", Description = "Deltoides Lateral" },
+                new Muscle { Id = 35, Name = "Anconeus", Description = "Ancóneo" },
+                new Muscle { Id = 36, Name = "Infraspinatus", Description = "Infraespinoso" },
+                new Muscle { Id = 37, Name = "Levator Scapulae", Description = "Elevador de la Escápula" },
+                new Muscle { Id = 38, Name = "Extensor Digitorum Longus", Description = "Extensor Largo de los Dedos" },
+                new Muscle { Id = 39, Name = "Supraspinatus", Description = "Supraespinoso" },
+                new Muscle { Id = 40, Name = "Medial Deltoids", Description = "Deltoides Medial" },
+                new Muscle { Id = 41, Name = "Subscapularis", Description = "Subescapular" },
+                new Muscle { Id = 42, Name = "Vastus Mediais", Description = "Vasto Medial" }
             );
 
             modelBuilder.Entity<Equipment>().HasData(
@@ -421,7 +421,7 @@ namespace sistemapersonaltrainer.Server.Data
                 new ExerciseClassification { Id = 12, Name = "Powerlifting", Description = "Levantamiento de potencia" },
                 new ExerciseClassification { Id = 13, Name = "Unsorted*", Description = "Sin clasificar" }
             );
-            
+
             #endregion
         }
     }

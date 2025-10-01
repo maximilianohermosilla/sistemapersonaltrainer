@@ -51,11 +51,12 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 // Configurar AutoMapper
 builder.Services.AddAutoMapper(config => new MappingProfile(config));
 
-// Configurar servicios de infraestructura
+// Configurar interfaces de repositorios y servicios
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-// Configurar servicios de la aplicación 
 builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
+builder.Services.AddScoped<IExerciseService, ExerciseService>();
 
 //ADD CORS
 builder.Services.AddCors(options => options.AddPolicy("AllowWebApp",

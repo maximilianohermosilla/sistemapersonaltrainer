@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using sistemapersonaltrainer.Server.DTOs;
+using sistemapersonaltrainer.Server.Models;
 using sistemapersonaltrainer.Server.Responses.Interfaces;
 
 namespace sistemapersonaltrainer.Server.Controllers
@@ -23,6 +24,11 @@ namespace sistemapersonaltrainer.Server.Controllers
             try
             {
                 var vUser = await vGblService.Create(pUser);
+
+                if (vUser == null)
+                {
+                    return NotFound(new ResponseMessage() { Message = "Ocurrió un error al crear el Usuario", Success = false });
+                }
 
                 return Created("", vUser);
             }
