@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using sistemapersonaltrainer.Server.Data;
 using sistemapersonaltrainer.Server.Data.Interfaces;
 using sistemapersonaltrainer.Server.Data.Repositories;
@@ -11,6 +12,7 @@ using sistemapersonaltrainer.Server.Profiles;
 using sistemapersonaltrainer.Server.Responses.Interfaces;
 using sistemapersonaltrainer.Server.Responses.Services;
 using System.Text;
+
 
 #region builder
 var builder = WebApplication.CreateBuilder(args);
@@ -97,6 +99,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 );
 
 builder.Services.AddAuthorization();
+
+builder.Host.UseSerilog((context, services, configuration) => configuration
+        .ReadFrom.Configuration(context.Configuration)
+        .ReadFrom.Services(services)
+        .Enrich.FromLogContext()
+        .WriteTo.Console());
 
 #endregion
 

@@ -9,7 +9,6 @@ export interface LoginProps {
 export default function Login({ onLoginSuccess }: LoginProps) {
     const [formData, setFormData] = useState<LoginForm>({ userName: '', password: '' });
     const [error, setError] = useState<string | null>(null);
-    const apiUrl = import.meta.env.VITE_API_URL;
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,7 +39,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
 
     return (
         <>
-            <h1 className="text-primary text-2xl font-semibold w-full text-center mb-3">Ingresar: {apiUrl}</h1>
+            <h1 className="text-primary text-2xl font-semibold w-full text-center mb-3">Ingresar</h1>
             <form onSubmit={handleSubmit} className="p-4 bg-gray-400 rounded-md max-w-xl">
                 <div className="m-auto flex justify-between px-2 mb-3 mt-8">
                     <label htmlFor="userName" className="text-white mr-3">Usuario:</label>
