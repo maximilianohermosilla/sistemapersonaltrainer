@@ -60,6 +60,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddScoped<IExerciseService, ExerciseService>();
 
+builder.Services.AddScoped<IParameterRepository, ParameterRepository>();
+builder.Services.AddScoped<IParameterService, ParameterService>();
+
 //ADD CORS
 builder.Services.AddCors(options => options.AddPolicy("AllowWebApp",
     builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));

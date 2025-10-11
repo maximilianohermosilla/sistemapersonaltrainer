@@ -1,9 +1,6 @@
 export enum ParameterEnum {
-    DELAY = "DELAY",
-    ADDRESS = "ADDRESS",
-    WHATSAPP = "WHATSAPP",
+    LOGO = "LOGO",
+    NAME = "NAME",
     EMAIL = "EMAIL",
-    PHONE = "PHONE",
-    INSTAGRAM = "INSTAGRAM",
-    SCHEDULES = "SCHEDULES"
+    WHATSAPP = "WHATSAPP"
 }
