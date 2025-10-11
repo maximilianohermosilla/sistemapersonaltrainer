@@ -1,20 +1,24 @@
+import "./FormMain.css";
 import { MdLogout } from "react-icons/md";
 import { FaRegSave } from "react-icons/fa";
-import Autocomplete from "../components/AutoComplete";
 import { useEffect, useState } from "react";
 import showToast from "../services/toast-service";
 import logo from "../assets/logo.png";
 import InputFile from "./InputFile";
 import { GetParameterByKey, UpdateParameter } from "../services/parameter-service";
 import { ParameterEnum } from "../enums/parameter";
+import FormWorkout from "./FormWorkout";
+import FormCustomer from "./FormCustomer";
+import Divider from "./Divider";
 
-interface FormExercisesProps {
-    exercises: any[],
+interface FormMainProps {
     logOut: () => void
 }
-export default function FormExercises({ exercises, logOut }: FormExercisesProps) {
+
+export default function FormMain({ logOut }: FormMainProps) {
     const [formData, setFormData] = useState<any>({ logo: '', name: '', email: '', whatsapp: '' });
     const [error, setError] = useState<string | null>(null);
+    const [workoutActivities, setWorkoutActivities] = useState<any[]>([]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -54,6 +58,11 @@ export default function FormExercises({ exercises, logOut }: FormExercisesProps)
         }
     };
 
+    const handleChangeActivities = (event: any) => {
+        console.log(event);
+        setWorkoutActivities(event);
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
@@ -68,41 +77,51 @@ export default function FormExercises({ exercises, logOut }: FormExercisesProps)
         await UpdateParameter({ key: ParameterEnum.WHATSAPP, value: formData?.whatsapp });
         await UpdateParameter({ key: ParameterEnum.EMAIL, value: formData?.email });
 
-        showToast({ title: 'Administración', description: 'Parámetros actualizados correctamente.' });
+        console.log(workoutActivities);
+
+        showToast({ title: 'Éxito', description: 'Se han guardado los cambios.' });
     }
 
 
     return (
         <>
             <form className="flex flex-col">
-                <img src={formData?.logo ? formData?.logo : logo} alt="Logo" width={300} height={100}
-                    className="m-auto mt-3 mb-5 shadow-lg shadow-gray-800 object-fill h-35" />
-                <div className="parameters__container m-auto mt-5">
-                    <div className="flex justify-between items-center my-3">
+                <img src={formData?.logo ? formData?.logo : logo} alt="Logo" width={320} height={100}
+                    className="m-auto my-3 shadow-lg shadow-gray-800 object-fill h-35" />
+                <div className="parameters__container m-auto mt-1">
+                    <Divider/>
+
+                    <h3 className="font-semibold text-gray-800 mb-3">Entrenador</h3>
+                    <div className="flex justify-between items-center my-3 gap-5">
                         <label htmlFor="logo" className="text-gray-600 text-sm mr-2">Logo:</label>
                         <InputFile onFileChange={handleFileChange} />
                     </div>
-                    <div className="flex justify-between items-center my-3">
+                    <div className="flex justify-between items-center my-3 gap-5">
                         <label htmlFor="name" className="text-gray-600 text-sm mr-2">Nombre:</label>
                         <input type="text" id="name" name="name" className="border-1 border-gray-400 rounded-sm px-2 text-sm"
                             value={formData?.name} onChange={handleChange} />
                     </div>
-                    <div className="flex justify-between items-center my-3">
+                    <div className="flex justify-between items-center my-3 gap-5">
                         <label htmlFor="email" className="text-gray-600 text-sm mr-2">Correo:</label>
                         <input type="text" id="email" name="email" className="border-1 border-gray-400 rounded-sm px-2 text-sm"
                             value={formData?.email} onChange={handleChange} />
                     </div>
-                    <div className="flex justify-between items-center my-3">
+                    <div className="flex justify-between items-center my-3 gap-5">
                         <label htmlFor="whatsapp" className="text-gray-600 text-sm mr-2">Whatsapp:</label>
                         <input type="text" id="whatsapp" name="whatsapp" className="border-1 border-gray-400 rounded-sm px-2 text-sm"
                             value={formData?.whatsapp} onChange={handleChange} />
                     </div>
-                    {exercises?.length > 0 && <Autocomplete allOptions={exercises?.map((e: any) => e.name)}></Autocomplete>}
+                    {error && <p className="text-danger text-center text-sm font-semibold px-2">{error}</p>}
+                    <Divider/>
+
+                    <FormCustomer onChange={handleChangeActivities}></FormCustomer>
+                    <Divider/>
+
+                    <FormWorkout onChange={handleChangeActivities}></FormWorkout>
                 </div>
-                {error && <p className="text-danger text-center text-sm font-semibold px-2">{error}</p>}
             </form>
             <footer className="flex gap-3">
-                <button className="button__danger__outlined flex items-center gap-1 my-5 mx-auto" onClick={logOut}><MdLogout />Cerrar sesión</button>
+                <button className="button__danger flex items-center gap-1 my-5 mx-auto" onClick={logOut}><MdLogout />Cerrar sesión</button>
                 <button className="button__primary flex items-center gap-3 my-5 mx-auto" onClick={handleSubmit}><FaRegSave />Guardar</button>
             </footer>
         </>

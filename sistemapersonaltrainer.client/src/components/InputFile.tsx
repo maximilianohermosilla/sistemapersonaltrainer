@@ -1,6 +1,6 @@
 export default function InputFile({onFileChange}: any) {
     return (
-        <div className="relative">
+        <div className="relative" style={{ maxWidth: "185px" }}>
             <label title="Click to upload" htmlFor="logo"
                 className="cursor-pointer flex items-center gap-4 px-6 py-1 text-sm w-50
                                         before:border-gray-400/60 hover:before:border-gray-900 group before:bg-gray-100 before:absolute 

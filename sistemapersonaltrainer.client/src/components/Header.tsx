@@ -11,7 +11,7 @@ const Header: React.FC = () => {
 
 
     return (
-        <header className="bg-white shadow-md fixed w-full top-0 left-0 z-50">
+        <header className="bg-primary shadow-md fixed w-full top-0 left-0 z-50">
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
@@ -36,7 +36,7 @@ const Header: React.FC = () => {
                     {/* Hamburguesa mobile */}
                     <div className="md:hidden flex items-center">
                         <button onClick={() => setMenuOpen(!menuOpen)} className="header__link hover:cursor-pointer">
-                            <FiMenu></FiMenu>
+                            <FiMenu color="white"></FiMenu>
                         </button>
                     </div>
                 </div>
@@ -45,16 +45,16 @@ const Header: React.FC = () => {
             {/* Menú desplegable en mobile */}
             {menuOpen && (
                 <nav className="md:hidden bg-white shadow-md">
-                    <div className="px-4 pt-2 pb-3 space-y-2">                        
+                    <div className="px-4 pt-2 pb-3 space-y-2 bg-primary border-t-1 border-gray-800">                        
 
                         {/* Links */}
-                        <a href="/contact" className="flex text-gray-700 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-1 rounded-md">
+                        <a href="/contact" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-1 rounded-md">
                             <FaMapMarkerAlt /> Ubicación
                         </a>
-                        <a href="/orders" className="flex text-gray-700 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-1 rounded-md">
+                        <a href="/orders" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-1 rounded-md">
                             <BsPersonVcardFill /> Pedidos
                         </a>
-                        <a href="/shopping-cart" className="flex text-gray-700 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-1 rounded-md">
+                        <a href="/shopping-cart" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-1 rounded-md">
                             <FaCartShopping /> Carrito
                         </a>
                     </div>
