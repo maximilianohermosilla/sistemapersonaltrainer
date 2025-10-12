@@ -1,5 +1,6 @@
 import { Document, Text, Page, Image, StyleSheet, View } from "@react-pdf/renderer";
 import PdfDocumentWorkout from "./PdfDocumentWorkout";
+import { formatDate } from "../utils/FormatDate";
 
 interface PDFProps {
     workout: any;
@@ -8,6 +9,7 @@ interface PDFProps {
 const styles = StyleSheet.create({
     page: {
         padding: 20,
+        paddingBottom: 40,
         fontSize: "12px"
     },
     image: {
@@ -17,21 +19,24 @@ const styles = StyleSheet.create({
     title: {
         fontSize: "14px",
         fontWeight: "bold",
-        marginBottom: "5px"
+        marginBottom: "3px"
     },
     section: {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         gap: "10px",
-        marginBottom: "20px"
+        marginBottom: "10px"
     },
     sectionRows: {
         display: "flex",
         flexDirection: "column",
-        gap: "5px",
+        gap: "8px",
         marginBottom: "20px"
     },
+    paddingRight: {
+        paddingRight: "10px",
+    }
 });
 
 export default function PdfDocument({ workout }: PDFProps) {
@@ -41,8 +46,8 @@ export default function PdfDocument({ workout }: PDFProps) {
         <Document>
             <Page size="A4" style={styles.page}>
                 <View style={styles.section}>
-                    <Image src={workout?.logo} style={styles.image}></Image>
-                    <View style={{ paddingRight: "20px"}}>
+                    {workout?.logo && <Image src={workout?.logo} style={styles.image}></Image>}
+                    <View style={[styles.sectionRows, styles.paddingRight, {width: "200px"}]}>
                         <Text style={styles.title}>Entrenador</Text>
                         <Text>Nombre: {workout.name || ''}</Text>
                         <Text>Email: {workout.email || ''}</Text>
@@ -50,11 +55,17 @@ export default function PdfDocument({ workout }: PDFProps) {
                     </View>
                 </View>
 
-                <View style={styles.sectionRows}>
-                    <Text style={styles.title}>Cliente</Text>
-                    <Text>Nombre: {workout.customer?.name || ''}</Text>
-                    <Text>Email: {workout.customer?.email || ''}</Text>
-                    <Text>Whatsapp: {workout.customer?.whatsapp || ''}</Text>
+                <View style={styles.section}>
+                    <View style={styles.sectionRows}>
+                        <Text style={styles.title}>Cliente</Text>
+                        <Text>Nombre: {workout.customer?.name || ''}</Text>
+                        <Text>Email: {workout.customer?.email || ''}</Text>
+                        <Text>Whatsapp: {workout.customer?.whatsapp || ''}</Text>
+                    </View>
+                <View style={[styles.sectionRows, styles.paddingRight, {width: "200px"}]}>
+                        <Text style={styles.title}>Fecha: </Text>
+                        <Text>{formatDate(new Date().toISOString())}</Text>
+                    </View>
                 </View>
 
                 <View style={styles.sectionRows}>

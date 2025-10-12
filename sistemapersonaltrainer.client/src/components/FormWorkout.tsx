@@ -13,7 +13,7 @@ interface FormWorkoutProps {
 
 export default function FormWorkout({ onChangeWorkout }: FormWorkoutProps) {
     const { isLoggedIn } = useAuth();
-    const [language, setLanguage] = useState<string>(LanguageEnum.INGLES);
+    const [language, setLanguage] = useState<string>(LanguageEnum.ESPAÑOL);
     const [loading, setLoading] = useState(true);
     const [exercises, setExercises] = useState<any[]>([]);
     const [workoutsActivities, setWorkoutsActivities] = useState<any[]>([]);
@@ -69,8 +69,8 @@ export default function FormWorkout({ onChangeWorkout }: FormWorkoutProps) {
                             <label htmlFor="language" className="text-gray-600 text-sm mr-2">Búsqueda:</label>
                             <select className=" w-full px-2 py-1 mb-1 rounded-sm border-2 border-gray-400 text-xs text-gray-600"
                                 id="language" name="language" value={language} onChange={(e) => setLanguage(e.target.value)} style={{ maxWidth: "185px" }}>
-                                <option value={LanguageEnum.INGLES}>{LanguageEnum.INGLES}</option>
                                 <option value={LanguageEnum.ESPAÑOL}>{LanguageEnum.ESPAÑOL}</option>
+                                <option value={LanguageEnum.INGLES}>{LanguageEnum.INGLES}</option>
                             </select>
                         </div>
 

@@ -12,7 +12,7 @@ interface FormWorkoutActivityExerciseProps {
 }
 
 export default function FormWorkoutActivityExercise({ index, exercises, selectedLanguage, onChangeExercise }: FormWorkoutActivityExerciseProps) {
-    const [formData, setFormData] = useState<any>({ id: index, exerciseId: 0,  name: '', series: '', repetitions: '', rest: '' });
+    const [formData, setFormData] = useState<any>({ id: index, exerciseId: 0,  name: '', series: '', repetitions: '', rest: '', shortVideo: '', longVideo: '' });
     const [exercise, setExercise] = useState<any>(null);
     
     const numberExercise = Number(index?.split('_')[1]) + 1;
@@ -25,8 +25,8 @@ export default function FormWorkoutActivityExercise({ index, exercises, selected
     };
 
     const handleSelectExercise = (element: any) => {
-        setFormData({ ...formData, exerciseId: element.id });
-        onChangeExercise({ ...formData, exerciseId: element.id });
+        setFormData({ ...formData, exerciseId: element.id, shortVideo: element.urlShortVideo, longVideo: element.urlLongVideo });
+        onChangeExercise({ ...formData, exerciseId: element.id, shortVideo: element.urlShortVideo, longVideo: element.urlLongVideo });
         setExercise(element);
     }
 

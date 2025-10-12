@@ -135,9 +135,9 @@ export default function FormMain() {
                 </footer>
             </form>
             <section className="w-full flex flex-col gap-2 h-full p-3">
-                <PDFViewer className="h-200 max-h-screen shadow-md shadow-gray-500/50">
+                {formData && <PDFViewer className="h-200 max-h-screen shadow-md shadow-gray-500/50">
                     <PdfDocument workout={formData}></PdfDocument>
-                </PDFViewer>
+                </PDFViewer>}
                 <PDFDownloadLink document={<PdfDocument workout={formData}></PdfDocument>} fileName="download.pdf">
                     {({ loading }) => loading
                         ? 'Descargando...'

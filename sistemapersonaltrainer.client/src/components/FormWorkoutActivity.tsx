@@ -28,6 +28,7 @@ export default function FormWorkoutActivity({ index, selectedLanguage, exercises
     }
 
     const handleChangeExercise = (element: any) => {
+        console.log(element)
         const exercisesTemp = [...formData.exercises];
         const index = exercisesTemp.findIndex((exercise: any) => exercise.id === element.id);
 
