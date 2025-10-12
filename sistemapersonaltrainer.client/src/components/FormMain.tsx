@@ -10,9 +10,11 @@ import FormWorkout from "./FormWorkout";
 import FormCustomer from "./FormCustomer";
 import Divider from "./Divider";
 import { FaFilePdf } from "react-icons/fa6";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import PdfDocument from "./PdfDocument";
 
 export default function FormMain() {
-    const [formData, setFormData] = useState<any>({ logo: '', name: '', email: '', whatsapp: '' });
+    const [formData, setFormData] = useState<any>({ logo: '', name: '', email: '', whatsapp: '', customer: {}, workoutActivities: [] });
     const [error, setError] = useState<string | null>(null);
     const [workoutActivities, setWorkoutActivities] = useState<any[]>([]);
     const [customer, setCustomer] = useState<any>(null);
@@ -57,13 +59,15 @@ export default function FormMain() {
 
     const handleChangeWorkout = (event: any) => {
         setWorkoutActivities(event);
-    }
-    
-    const handleChangeCustomer = (event: any) => {
-        setCustomer(event);
+        setFormData({ ...formData, workoutActivities: event });
     }
 
-    const handleSubmit = async (e: React.FormEvent) => {        
+    const handleChangeCustomer = (event: any) => {
+        setCustomer(event);
+        setFormData({ ...formData, customer: event });
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
 
@@ -83,13 +87,13 @@ export default function FormMain() {
         await UpdateParameter({ key: ParameterEnum.EMAIL, value: formData?.email });
     }
 
-    const previewWorkout = () => {
-
-    }
-
+    // const previewWorkout = (e: React.FormEvent) => {
+    //     e.preventDefault();
+    //     console.log(formData)
+    // }
 
     return (
-        <>
+        <div className="flex md:flex-row flex-col w-full gap-2 md:pl-5">
             <form className="flex flex-col">
                 <img src={formData?.logo ? formData?.logo : logo} alt="Logo" width={320} height={100}
                     className="m-auto my-3 shadow-lg shadow-gray-800 object-fill h-35" />
@@ -122,15 +126,25 @@ export default function FormMain() {
                     <Divider />
 
                     <FormWorkout onChangeWorkout={handleChangeWorkout}></FormWorkout>
-                    
+
                     {error && <p className="text-danger text-center text-sm font-semibold px-2">{error}</p>}
                 </div>
 
-                <footer className="parameters__container flex gap-3 justify-between my-5 mx-auto">
-                    <button className="button__primary__outlined flex items-center gap-1" onClick={previewWorkout}><FaFilePdf /> Visualizar</button>
-                    <button className="button__primary flex items-center gap-3" onClick={handleSubmit}><FaRegSave />Guardar</button>
+                <footer className="parameters__container flex gap-3 justify-between my-3 mx-auto">
+                    <button className="button__primary flex items-center gap-3 m-auto" onClick={handleSubmit}><FaRegSave />Guardar</button>
                 </footer>
             </form>
-        </>
+            <section className="w-full flex flex-col gap-2 h-full p-3">
+                <PDFViewer className="h-200 max-h-screen shadow-md shadow-gray-500/50">
+                    <PdfDocument workout={formData}></PdfDocument>
+                </PDFViewer>
+                <PDFDownloadLink document={<PdfDocument workout={formData}></PdfDocument>} fileName="download.pdf">
+                    {({ loading }) => loading
+                        ? 'Descargando...'
+                        : <button className="button__primary__outlined flex items-center gap-1 m-auto"><FaFilePdf /> Descargar</button>
+                    }
+                </PDFDownloadLink>
+            </section>
+        </div>
     )
 }
