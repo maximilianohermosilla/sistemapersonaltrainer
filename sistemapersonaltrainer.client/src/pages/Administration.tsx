@@ -5,16 +5,11 @@ import showToast from "../services/toast-service";
 import FormMain from "../components/FormMain";
 
 export default function Administration() {
-    const { isLoggedIn, login, logout } = useAuth();
+    const { isLoggedIn, login } = useAuth();
 
     const handleLoginSuccess = (userName?: any, token?: any) => {
         login(userName, token);
         showToast({ title: 'Login', description: 'Bienvenido al panel de administración.' });
-    };
-
-    const handleLogout = () => {
-        logout();
-        showToast({ title: 'Login', description: 'Se ha cerrado la sesión.' });
     };
 
     return (
@@ -24,7 +19,7 @@ export default function Administration() {
                     <Login onLoginSuccess={handleLoginSuccess}></Login>
                 </section>
                 : <section className="main__container flex flex-col justify-between h-fit">
-                    <FormMain logOut={handleLogout}></FormMain>
+                    <FormMain></FormMain>
                 </section>
             }
         </div>

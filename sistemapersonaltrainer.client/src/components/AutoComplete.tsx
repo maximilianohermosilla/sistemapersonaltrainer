@@ -2,22 +2,29 @@ import { useState, useEffect } from 'react';
 import { LanguageEnum } from '../enums/LanguageEnum';
 
 interface AutoCompleteProps{
-    exercises: any[],
-    selectedLanguage: string
+    elements: any[],
+    selectedLanguage: string,
+    onSelectExercise: (element: any) => void,
+    onChangeName: (element: string) => void
 }
 
-export default function Autocomplete({ exercises, selectedLanguage }: AutoCompleteProps) {
+export default function Autocomplete({ elements, selectedLanguage, onSelectExercise, onChangeName }: AutoCompleteProps) {
     const [language, setLanguage] = useState<string>(selectedLanguage);
     const [inputValue, setInputValue] = useState('');
     const [suggestions, setSuggestions] = useState<any[]>([]);
 
     useEffect(() => {
         if (inputValue.length > 0) {
-            const optionsLanguage = exercises?.map((o: any) => language == LanguageEnum.ESPAÑOL ? o.description : o.name);
+            const optionsLanguage = elements?.map((o: any) => language == LanguageEnum.ESPAÑOL ? o.description : o.name);
             const filtered = optionsLanguage?.filter((option: any) =>
                 option?.toLowerCase().includes(inputValue.toLowerCase())
             );
             setSuggestions(filtered);
+
+            if (filtered?.length == 1) {
+                //setInputValue(filtered[0]);
+                onSelectExercise(elements.find((o: any) => language == LanguageEnum.ESPAÑOL ? o.description == filtered[0] : o.name == filtered[0]));
+            }
         } else {
             setSuggestions([]);
         }
@@ -29,19 +36,18 @@ export default function Autocomplete({ exercises, selectedLanguage }: AutoComple
 
     const handleInputChange = (event: any) => {
         setInputValue(event.target.value);
+        onChangeName(event.target.value);
     };
 
     const handleSuggestionClick = (suggestion: any) => {
-        console.log(suggestion);
-        setInputValue(suggestion);
-        setSuggestions([]);
-        setSuggestions([]);
+        setInputValue(suggestion);        
+        onChangeName(suggestion);
     };
 
     return (
         <div>
             <input
-                className="w-full px-2 py-1 mb-1 rounded-sm my-3 text-sm"
+                className="w-full px-2 py-1 my-1 rounded-sm text-sm"
                 type="text"
                 value={inputValue}
                 onChange={handleInputChange}

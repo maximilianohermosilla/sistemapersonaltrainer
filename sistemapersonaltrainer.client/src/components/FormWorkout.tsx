@@ -8,14 +8,15 @@ import Spinner from "./Spinner";
 import FormWorkoutActivity from "./FormWorkoutActivity";
 
 interface FormWorkoutProps {
-    onChange: (element: any) => void
+    onChangeWorkout: (element: any) => void
 }
 
-export default function FormWorkout({ onChange }: FormWorkoutProps) {
+export default function FormWorkout({ onChangeWorkout }: FormWorkoutProps) {
     const { isLoggedIn } = useAuth();
     const [language, setLanguage] = useState<string>(LanguageEnum.INGLES);
     const [loading, setLoading] = useState(true);
     const [exercises, setExercises] = useState<any[]>([]);
+    const [workoutsActivities, setWorkoutsActivities] = useState<any[]>([]);
     const [quantityWorkouts, setQuantityWorkouts] = useState<number>(1);
 
     useEffect(() => {
@@ -24,19 +25,17 @@ export default function FormWorkout({ onChange }: FormWorkoutProps) {
         }
     }, [isLoggedIn]);
 
-    useEffect(() => {
-        console.log(quantityWorkouts);
-        onChange(quantityWorkouts);
-    }, [quantityWorkouts]);
+    // useEffect(() => {
+    //     onChange(quantityWorkouts);
+    // }, [quantityWorkouts]);
 
     const getExercises = async () => {
         const exercisesList = await GetAllExercises();
         setLoading(false);
         setExercises(exercisesList);
-        console.log(exercisesList)
     }
 
-    const removeWorkouts = (event?: any) => {
+    const removeWorkouts = () => {
         event?.preventDefault();
         setQuantityWorkouts(quantityWorkouts > 1 ? quantityWorkouts - 1 : 1)
     }
@@ -45,6 +44,19 @@ export default function FormWorkout({ onChange }: FormWorkoutProps) {
         event?.preventDefault();
         setQuantityWorkouts(quantityWorkouts + 1);
     }
+    
+    const handleChangeWorkout = (element?: any) => {
+        const workoutsActivitiesTemp = [...workoutsActivities];
+        const index = workoutsActivitiesTemp.findIndex((workout: any) => workout.id === element.id);
+
+        if (index !== -1) {
+            workoutsActivitiesTemp[index] = element;
+        } else {
+            workoutsActivitiesTemp.push(element);
+        }
+        setWorkoutsActivities(workoutsActivitiesTemp);
+        onChangeWorkout(workoutsActivitiesTemp);
+    }
 
     return (
         <>
@@ -52,7 +64,7 @@ export default function FormWorkout({ onChange }: FormWorkoutProps) {
                 loading
                     ? <Spinner text="Cargando ejercicios..."></Spinner>
                     : <section className="workout__container">
-                        <h3 className="font-semibold text-gray-800 mb-3 py-2">Entrenamiento</h3>
+                        <h3 className="font-semibold text-gray-800 mb-3">Entrenamiento</h3>
                         <div className="flex justify-between items-center my-3 gap-5">
                             <label htmlFor="language" className="text-gray-600 text-sm mr-2">Búsqueda:</label>
                             <select className=" w-full px-2 py-1 mb-1 rounded-sm border-2 border-gray-400 text-xs text-gray-600"
@@ -79,7 +91,8 @@ export default function FormWorkout({ onChange }: FormWorkoutProps) {
 
                         <div className="my-3">
                             {Array.from({ length: quantityWorkouts }).map((_, index) => (
-                                <FormWorkoutActivity key={index} selectedLanguage={language} index={index} exercises={exercises}></FormWorkoutActivity>                                    
+                                <FormWorkoutActivity key={index} selectedLanguage={language} index={index} 
+                                    exercises={exercises} onChangeWorkoutActivity={handleChangeWorkout}></FormWorkoutActivity>                                    
                             ))}
                         </div>
                     </section >

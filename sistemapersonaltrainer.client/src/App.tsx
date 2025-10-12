@@ -6,20 +6,21 @@ import { Toaster } from 'sonner'
 import Administration from './pages/Administration'
 
 function App() {
-  return (
-        <div className="main__height w-full bg-gray-100">
-            <Header></Header>
-            <main className="w-full main__height mb-0" style={{ paddingTop: "64px" }}>
-                <AuthProvider>
+    return (
+        <AuthProvider>
+            <div className="main__height w-full bg-gray-100">
+                <Header></Header>
+                <main className="w-full main__height mb-0" style={{ paddingTop: "64px" }}>
+
                     <Routes>
-                        <Route index element={<Administration />} />                        
+                        <Route index element={<Administration />} />
                         <Route path="/admin" element={<Administration />} />
                         <Route path="*" element={<Administration />} />
                     </Routes>
-                </AuthProvider>
-            </main>
-            <Toaster duration={2000} position="top-right" />
-        </div>
+                </main>
+                <Toaster duration={2000} position="top-right" />
+            </div>
+        </AuthProvider >
     );
 }
 
