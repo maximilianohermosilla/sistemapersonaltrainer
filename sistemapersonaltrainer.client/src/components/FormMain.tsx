@@ -134,7 +134,8 @@ export default function FormMain() {
                     <button className="button__primary flex items-center gap-3 m-auto" onClick={handleSubmit}><FaRegSave />Guardar</button>
                 </footer>
             </form>
-            <section className="w-full flex flex-col gap-2 h-full p-3">
+
+            <section className="w-full flex flex-col gap-2 h-full p-3 gap-5">
                 {formData && <PDFViewer className="h-200 max-h-screen shadow-md shadow-gray-500/50">
                     <PdfDocument workout={formData}></PdfDocument>
                 </PDFViewer>}

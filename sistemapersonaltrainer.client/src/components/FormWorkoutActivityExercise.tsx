@@ -51,17 +51,17 @@ export default function FormWorkoutActivityExercise({ index, exercises, selected
             <div className="flex justify-between items-center my-1 mb-3 gap-5">
                 <div className="flex flex-col ">
                     <label htmlFor={`series_${index}`} className="text-gray-600 text-xs mr-2">Series:</label>
-                    <input type="text" id={`series_${index}`} name={`series`} className="border-1 border-gray-400 rounded-sm px-2 text-sm w-20"
+                    <input type="text" id={`series_${index}`} name={`series`} className="border-1 border-gray-400 rounded-sm px-2 text-xs w-20"
                         value={formData?.series} onChange={handleChange} placeholder="Cantidad"/>
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor={`repetitions_${index}`} className="text-gray-600 text-xs mr-2">Repeticiones:</label>
-                    <input type="text" id={`repetitions_${index}`} name={`repetitions`} className="border-1 border-gray-400 rounded-sm px-2 text-sm w-20"
+                    <input type="text" id={`repetitions_${index}`} name={`repetitions`} className="border-1 border-gray-400 rounded-sm px-2 text-xs w-20"
                         value={formData?.repetitions} onChange={handleChange} placeholder="Cantidad"/>
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor={`rest_${index}`} className="text-gray-600 text-xs mr-2">Descanso (m):</label>
-                    <input type="text" id={`rest_${index}`} name={`rest`} className="border-1 border-gray-400 rounded-sm px-2 text-sm w-20"
+                    <input type="text" id={`rest_${index}`} name={`rest`} className="border-1 border-gray-400 rounded-sm px-2 text-xs w-20"
                         value={formData?.rest} onChange={handleChange} placeholder="Minutos"/>
                 </div>
             </div>
