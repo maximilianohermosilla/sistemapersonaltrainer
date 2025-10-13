@@ -12,7 +12,7 @@ interface FormWorkoutActivityExerciseProps {
 }
 
 export default function FormWorkoutActivityExercise({ index, exercises, selectedLanguage, onChangeExercise }: FormWorkoutActivityExerciseProps) {
-    const [formData, setFormData] = useState<any>({ id: index, exerciseId: 0,  name: '', series: '', repetitions: '', rest: '', shortVideo: '', longVideo: '' });
+    const [formData, setFormData] = useState<any>({ id: index, exerciseId: 0,  name: '', series: '', repetitions: '', restMinutes: '', shortVideo: '', longVideo: '' });
     const [exercise, setExercise] = useState<any>(null);
     
     const numberExercise = Number(index?.split('_')[1]) + 1;
@@ -60,9 +60,9 @@ export default function FormWorkoutActivityExercise({ index, exercises, selected
                         value={formData?.repetitions} onChange={handleChange} placeholder="Cantidad"/>
                 </div>
                 <div className="flex flex-col">
-                    <label htmlFor={`rest_${index}`} className="text-gray-600 text-xs mr-2">Descanso (m):</label>
-                    <input type="text" id={`rest_${index}`} name={`rest`} className="border-1 border-gray-400 rounded-sm px-2 text-xs w-20"
-                        value={formData?.rest} onChange={handleChange} placeholder="Minutos"/>
+                    <label htmlFor={`restMinutes_${index}`} className="text-gray-600 text-xs mr-2">Descanso (m):</label>
+                    <input type="text" id={`restMinutes_${index}`} name={`restMinutes`} className="border-1 border-gray-400 rounded-sm px-2 text-xs w-20"
+                        value={formData?.restMinutes} onChange={handleChange} placeholder="Minutos"/>
                 </div>
             </div>
         </>

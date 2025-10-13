@@ -11,6 +11,7 @@ namespace sistemapersonaltrainer.Server.Models
         public string? Description { get; set; } = null!;
         public int CustomerId { get; set; }
         public int UserId { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
 
         public Customer? Customer { get; set; } = null;
         public User? User { get; set; } = null;

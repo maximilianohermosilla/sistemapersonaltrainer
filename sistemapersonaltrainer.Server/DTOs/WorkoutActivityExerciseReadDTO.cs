@@ -10,6 +10,8 @@
         public int? Series { get; set; } = null!;
         public int? Repetitions { get; set; } = null!;
         public int? RestMinutes{ get; set; } = null!;
+        public string? ShortVideo { get; set; } = null!;
+        public string? LongVideo { get; set; } = null!;
 
         public ExerciseReadDTO? Exercise { get; set; } = null;
     }

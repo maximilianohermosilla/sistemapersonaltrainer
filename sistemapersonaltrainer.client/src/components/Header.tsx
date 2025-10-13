@@ -8,6 +8,7 @@ import { FiMenu } from "react-icons/fi";
 import { BsPersonVcard, BsPersonVcardFill } from "react-icons/bs";
 import { GrContact } from "react-icons/gr";
 import { MdLogin, MdLogout } from "react-icons/md";
+import { CgGym } from "react-icons/cg";
 
 const Header: React.FC = () => {
     const { isLoggedIn, logout } = useAuth();
@@ -56,11 +57,14 @@ const Header: React.FC = () => {
                     <div className="px-4 pt-2 pb-3 space-y-2 bg-primary border-t-1 border-gray-800">                        
 
                         {/* Links */}
-                        <a href="/contact" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-2 rounded-md">
+                        {isLoggedIn && <a href="/nuevo-entrenamiento" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-2 rounded-md">
+                            <CgGym /> Nuevo Entrenamiento
+                        </a>}
+                        {/* <a href="/contact" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-2 rounded-md">
                             <GrContact /> Contacto
-                        </a>
-                        <a href="/orders" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-2 rounded-md">
-                            <BsPersonVcard /> Historial
+                        </a> */}
+                        <a href="/search" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-2 rounded-md">
+                            <BsPersonVcard /> Entrenamientos
                         </a>
                         {isLoggedIn 
                             ? <a onClick={handleLogout} 

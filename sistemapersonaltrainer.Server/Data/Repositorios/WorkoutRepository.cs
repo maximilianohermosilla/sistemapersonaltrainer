@@ -36,6 +36,28 @@ namespace sistemapersonaltrainer.Server.Data.Repositories
                 .ToList();
         }
 
+        public IEnumerable<Workout> GetAllByUser(int userId)
+        {
+            return vGblContext.Workouts
+                .Include(e => e.WorkoutActivities)
+                .ThenInclude(e => e.WorkoutActivityExercises)
+                .Include(e => e.Customer)
+                .Include(e => e.User)
+                .Where(e => e.UserId == userId)
+                .ToList();
+        }
+
+        public IEnumerable<Workout> GetAllByCustomer(string customer)
+        {
+            return vGblContext.Workouts
+                .Include(e => e.WorkoutActivities)
+                .ThenInclude(e => e.WorkoutActivityExercises)
+                .Include(e => e.Customer)
+                .Include(e => e.User)
+                .Where(e => e.Customer!.FirstName == customer || e.Customer!.Email == customer || e.Customer!.PhoneNumber == customer) 
+                .ToList();
+        }
+
         public Workout GetById(int pId)
         {
             return vGblContext.Workouts

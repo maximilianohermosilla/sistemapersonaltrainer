@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         gap: "10px",
-        marginBottom: "10px"
+        marginBottom: "5px"
     },
     sectionRows: {
         display: "flex",
         flexDirection: "column",
         gap: "8px",
-        marginBottom: "20px"
+        marginBottom: "10px"
     },
     paddingRight: {
         paddingRight: "10px",
@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
 
 export default function PdfDocument({ workout }: PDFProps) {
 
-    console.log(workout);
     return (
         <Document>
             <Page size="A4" style={styles.page}>
@@ -58,13 +57,13 @@ export default function PdfDocument({ workout }: PDFProps) {
                 <View style={styles.section}>
                     <View style={styles.sectionRows}>
                         <Text style={styles.title}>Cliente</Text>
-                        <Text>Nombre: {workout.customer?.name || ''}</Text>
+                        <Text>Nombre: {workout.customer?.firstName || workout.customer?.name || ''}</Text>
                         <Text>Email: {workout.customer?.email || ''}</Text>
                         <Text>Whatsapp: {workout.customer?.whatsapp || ''}</Text>
                     </View>
                 <View style={[styles.sectionRows, styles.paddingRight, {width: "200px"}]}>
                         <Text style={styles.title}>Fecha: </Text>
-                        <Text>{formatDate(new Date().toISOString())}</Text>
+                        <Text>{formatDate(workout.createdAt) || formatDate(new Date().toISOString())}</Text>
                     </View>
                 </View>
 

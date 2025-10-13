@@ -12,12 +12,17 @@ import Divider from "./Divider";
 import { FaFilePdf } from "react-icons/fa6";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import PdfDocument from "./PdfDocument";
+import type { WorkoutActivity } from "../interfaces/workout-activity";
+import type { Workout } from "../interfaces/workout";
+import { formatDate } from "../utils/FormatDate";
+import { CreateWorkout } from "../services/workout-service";
+import Spinner from "./Spinner";
 
 export default function FormMain() {
-    const [formData, setFormData] = useState<any>({ logo: '', name: '', email: '', whatsapp: '', customer: {}, workoutActivities: [] });
+    const [formData, setFormData] = useState<any>({ logo: '', name: '', email: '', whatsapp: '', customer: {}, workoutActivities: [], createdAt: new Date().toISOString() });
     const [error, setError] = useState<string | null>(null);
-    const [workoutActivities, setWorkoutActivities] = useState<any[]>([]);
     const [customer, setCustomer] = useState<any>(null);
+    const [pdfVisible , setPdfVisible] = useState(true);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -58,8 +63,11 @@ export default function FormMain() {
     };
 
     const handleChangeWorkout = (event: any) => {
-        setWorkoutActivities(event);
-        setFormData({ ...formData, workoutActivities: event });
+        setPdfVisible(false);
+        setTimeout(() => {
+            setFormData({ ...formData, workoutActivities: event });
+            setPdfVisible(true);
+        }, 200);
     }
 
     const handleChangeCustomer = (event: any) => {
@@ -73,9 +81,10 @@ export default function FormMain() {
 
         if (!formData.name) { return setError('Por favor, ingrese el nombre de entrenador.'); }
         if (!customer || customer.name == '') { return setError('Por favor, ingrese el nombre del cliente.'); }
-        if (!workoutActivities || workoutActivities.length === 0) { return setError('Por favor, ingrese al menos un ejercicio.'); }
+        if (!formData?.workoutActivities || formData?.workoutActivities.length === 0) { return setError('Por favor, ingrese al menos un ejercicio.'); }
 
         await updateParameters();
+        await createWorkout();
 
         showToast({ title: 'Éxito', description: 'Se han guardado los cambios.' });
     }
@@ -87,10 +96,47 @@ export default function FormMain() {
         await UpdateParameter({ key: ParameterEnum.EMAIL, value: formData?.email });
     }
 
-    // const previewWorkout = (e: React.FormEvent) => {
-    //     e.preventDefault();
-    //     console.log(formData)
-    // }
+    const createWorkout = async () => {
+        let workoutActivities: WorkoutActivity[] = [];
+        formData?.workoutActivities.forEach((element: any) => {
+            let workoutActivity: WorkoutActivity = {
+                id: 0,
+                name: element.name,
+                description: element.name,
+                workoutId: 0,
+                workoutActivityExercises:
+                    element.workoutActivityExercises.map((exercise: any) => ({
+                        id: 0,
+                        name: exercise.name,
+                        description: exercise.name,
+                        shortVideo: exercise.shortVideo,
+                        longVideo: exercise.longVideo,
+                        workoutActivityId: 0,
+                        exerciseId: exercise.exerciseId,
+                        series: Number(exercise.series || "0"),
+                        repetitions: Number(exercise.repetitions || "0"),
+                        restMinutes: Number(exercise.restMinutes || "0"),
+                    }))
+            }
+
+            workoutActivities.push(workoutActivity);
+        });
+
+        let workout: Workout = {
+            id: 0,
+            name: `${customer?.name} - ${formatDate(new Date().toISOString())}`,
+            description: '',
+            customerId: customer?.id || 0,
+            userId: 0,
+            userName: '',
+            createdAt: new Date().toISOString(),
+            customer: { id: 0, firstName: customer.name, lastName: '', phoneNumber: customer.whatsapp, documentNumber: '', email: customer.email, weight: 0, height: 0, imc: 0 },
+            workoutActivities: workoutActivities
+        }
+
+        const response = await CreateWorkout(workout);
+        console.log(response);
+    }
 
     return (
         <div className="flex md:flex-row flex-col w-full gap-2 md:pl-5">
@@ -130,21 +176,23 @@ export default function FormMain() {
                     {error && <p className="text-danger text-center text-sm font-semibold px-2">{error}</p>}
                 </div>
 
-                <footer className="parameters__container flex gap-3 justify-between my-3 mx-auto">
-                    <button className="button__primary flex items-center gap-3 m-auto" onClick={handleSubmit}><FaRegSave />Guardar</button>
-                </footer>
             </form>
 
-            <section className="w-full flex flex-col gap-2 h-full p-3 gap-5">
-                {formData && <PDFViewer className="h-200 max-h-screen shadow-md shadow-gray-500/50">
+            <section className="w-full flex flex-col p-3 gap-5">
+                {!pdfVisible && <Spinner text="Generando PDF"></Spinner>}
+                {formData && pdfVisible && <PDFViewer className="pdf__viewer h-100 shadow-md shadow-gray-500/50">
                     <PdfDocument workout={formData}></PdfDocument>
                 </PDFViewer>}
-                <PDFDownloadLink document={<PdfDocument workout={formData}></PdfDocument>} fileName="download.pdf">
+                {formData && pdfVisible && <PDFDownloadLink document={<PdfDocument workout={formData}></PdfDocument>} fileName="download.pdf">
                     {({ loading }) => loading
                         ? 'Descargando...'
-                        : <button className="button__primary__outlined flex items-center gap-1 m-auto"><FaFilePdf /> Descargar</button>
+                        :
+                        <footer className="parameters__container flex gap-3 justify-between my-3 mx-auto">
+                            <button className="button__primary__outlined flex items-center gap-1 m-auto"><FaFilePdf /> Descargar</button>
+                            <button className="button__primary flex items-center gap-3 m-auto" onClick={handleSubmit}><FaRegSave />Guardar</button>
+                        </footer>
                     }
-                </PDFDownloadLink>
+                </PDFDownloadLink>}
             </section>
         </div>
     )

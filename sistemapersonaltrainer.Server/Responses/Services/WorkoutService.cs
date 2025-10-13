@@ -9,12 +9,14 @@ namespace sistemapersonaltrainer.Server.Responses.Services
     public class WorkoutService : IWorkoutService
     {
         private readonly IWorkoutRepository vGblRepository;
+        private readonly ICustomerRepository vGblCustomerRepository;
         private readonly IConfiguration vGblConfiguration;
         private readonly IMapper vGblMapper;
 
-        public WorkoutService(IWorkoutRepository pRepository, IConfiguration pConfiguration, IMapper pMapper)
+        public WorkoutService(IWorkoutRepository pRepository, IConfiguration pConfiguration, ICustomerRepository pCustomerRepository, IMapper pMapper)
         {
             vGblRepository = pRepository;
+            vGblCustomerRepository = pCustomerRepository;
             vGblConfiguration = pConfiguration;
             vGblMapper = pMapper;
         }
@@ -23,7 +25,20 @@ namespace sistemapersonaltrainer.Server.Responses.Services
         {
             try
             {
+                var vCustomer = vGblCustomerRepository.GetByNameOrEmailOrPhone(pWorkout!.Customer!.FirstName!, pWorkout!.Customer!.Email!, pWorkout!.Customer!.PhoneNumber!);
+                if (vCustomer != null)
+                {
+                    vCustomer.FirstName = pWorkout!.Customer!.FirstName;
+                    vCustomer.Email = vCustomer.Email == null || vCustomer.Email == "" ? pWorkout!.Customer!.Email : vCustomer.Email;
+                    vCustomer.PhoneNumber = vCustomer.PhoneNumber == null || vCustomer.PhoneNumber == "" ? pWorkout!.Customer!.PhoneNumber : vCustomer.PhoneNumber;
+                    pWorkout.CustomerId = vCustomer.Id;
+                    pWorkout.Customer = null;                    
+
+                    vGblCustomerRepository.SaveChanges();
+                }
+
                 var vWorkout = vGblMapper.Map<Workout>(pWorkout);
+                vWorkout.User = null;
                 var vWorkoutCreada = vGblRepository.Create(vWorkout);
 
                 return vGblMapper.Map<WorkoutReadDTO>(vWorkoutCreada);
@@ -63,6 +78,34 @@ namespace sistemapersonaltrainer.Server.Responses.Services
             try
             {
                 var vWorkouts = vGblRepository.GetAll();
+
+                return vGblMapper.Map<IEnumerable<WorkoutReadDTO>>(vWorkouts);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<WorkoutReadDTO>> GetAllByUser(int userId)
+        {
+            try
+            {
+                var vWorkouts = vGblRepository.GetAllByUser(userId);
+
+                return vGblMapper.Map<IEnumerable<WorkoutReadDTO>>(vWorkouts);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<IEnumerable<WorkoutReadDTO>> GetAllByCustomer(string customer)
+        {
+            try
+            {
+                var vWorkouts = vGblRepository.GetAllByCustomer(customer);
 
                 return vGblMapper.Map<IEnumerable<WorkoutReadDTO>>(vWorkouts);
             }

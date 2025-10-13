@@ -1,10 +1,10 @@
-import "./Administration.css";
+import "./NewWorkout.css";
 import { useAuth } from "../context/AuthContext";
 import Login from "../components/Login";
 import showToast from "../services/toast-service";
 import FormMain from "../components/FormMain";
 
-export default function Administration() {
+export default function NewWorkout() {
     const { isLoggedIn, login } = useAuth();
 
     const handleLoginSuccess = (userName?: any, token?: any) => {

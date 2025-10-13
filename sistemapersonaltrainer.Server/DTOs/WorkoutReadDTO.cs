@@ -7,6 +7,7 @@
         public string? Description { get; set; } = null!;
         public int CustomerId { get; set; }
         public int UserId { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
         public CustomerReadDTO? Customer { get; set; } = null;
         public UserReadDTO? User { get; set; } = null;

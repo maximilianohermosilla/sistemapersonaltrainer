@@ -14,6 +14,8 @@ namespace sistemapersonaltrainer.Server.Models
         public int? Series { get; set; } = null!;
         public int? Repetitions { get; set; } = null!;
         public int? RestMinutes{ get; set; } = null!;
+        public string? ShortVideo { get; set; } = null!;
+        public string? LongVideo { get; set; } = null!;
 
         public WorkoutActivity? WorkoutActivity { get; set; } = null;
         public Exercise? Exercise { get; set; } = null;

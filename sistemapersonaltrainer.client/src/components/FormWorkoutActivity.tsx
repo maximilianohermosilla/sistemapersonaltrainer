@@ -11,7 +11,7 @@ interface FormWorkoutActivityProps {
 
 export default function FormWorkoutActivity({ index, selectedLanguage, exercises, onChangeWorkoutActivity }: FormWorkoutActivityProps) {
     const [quantityExercises, setQuantityExercises] = useState<number>(1);
-    const [formData, setFormData] = useState<any>({ id: index, name: `Entrenamiento ${index+1}`, exercises: [] });
+    const [formData, setFormData] = useState<any>({ id: index, name: `Entrenamiento ${index+1}`, workoutActivityExercises: [] });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,6 +19,9 @@ export default function FormWorkoutActivity({ index, selectedLanguage, exercises
 
     const removeExercise = () => {
         event?.preventDefault();
+        const exercisesTemp = formData.workoutActivityExercises.slice(0, quantityExercises-1);
+        setFormData({ ...formData, workoutActivityExercises: exercisesTemp });
+        onChangeWorkoutActivity({ ...formData, workoutActivityExercises: exercisesTemp });
         setQuantityExercises(quantityExercises > 1 ? quantityExercises - 1 : 1)
     }
 
@@ -28,8 +31,7 @@ export default function FormWorkoutActivity({ index, selectedLanguage, exercises
     }
 
     const handleChangeExercise = (element: any) => {
-        console.log(element)
-        const exercisesTemp = [...formData.exercises];
+        const exercisesTemp = [...formData.workoutActivityExercises];
         const index = exercisesTemp.findIndex((exercise: any) => exercise.id === element.id);
 
         if (index !== -1) {
@@ -37,8 +39,8 @@ export default function FormWorkoutActivity({ index, selectedLanguage, exercises
         } else {
             exercisesTemp.push(element);
         }
-        setFormData({ ...formData, exercises: exercisesTemp });
-        onChangeWorkoutActivity({ ...formData, exercises: exercisesTemp });
+        setFormData({ ...formData, workoutActivityExercises: exercisesTemp });
+        onChangeWorkoutActivity({ ...formData, workoutActivityExercises: exercisesTemp });
     }
 
     return (

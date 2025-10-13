@@ -1,0 +1,52 @@
+﻿using sistemapersonaltrainer.Server.Data.Interfaces;
+using sistemapersonaltrainer.Server.Models;
+
+namespace sistemapersonaltrainer.Server.Data.Repositories
+{
+    public class CustomerRepository: ICustomerRepository
+    {
+        private readonly AppDbContext vGblContext;
+
+        public bool SaveChanges()
+        {
+            return vGblContext.SaveChanges() > 0;
+        }
+
+        public CustomerRepository(AppDbContext pContext)
+        {
+            vGblContext = pContext;
+        }
+
+        public Customer Create(Customer pCustomer)
+        {
+            vGblContext.Customers.Add(pCustomer);
+            vGblContext.SaveChanges();
+
+            return pCustomer;
+        }
+
+        public IEnumerable<Customer> GetAll()
+        {
+            return vGblContext.Customers.ToList();
+        }
+
+        public Customer GetById(int pId)
+        {
+            return vGblContext.Customers.FirstOrDefault(e => e.Id == pId)!;
+        }
+
+        public Customer GetByEmailOrPhone(string pEmail, string pPhone)
+        {
+            return vGblContext.Customers.FirstOrDefault(e => e.Email == pEmail || e.PhoneNumber == pPhone)!;
+        }
+
+        public Customer GetByNameOrEmailOrPhone(string pName, string pEmail, string pPhone)
+        {
+            return vGblContext.Customers.FirstOrDefault(e => 
+                (!string.IsNullOrEmpty(e.FirstName) && e.FirstName == pName) || 
+                (!string.IsNullOrEmpty(e.Email) && e.Email == pEmail) || 
+                (!string.IsNullOrEmpty(e.PhoneNumber) && e.PhoneNumber == pPhone))!;
+        }
+        
+    }
+}

@@ -3,7 +3,8 @@ import Header from './components/Header'
 import { AuthProvider } from './context/AuthContext'
 import { Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
-import Administration from './pages/Administration'
+import NewWorkout from './pages/NewWorkout'
+import Search from './pages/Search'
 
 function App() {
     return (
@@ -13,9 +14,11 @@ function App() {
                 <main className="w-full main__height mb-0" style={{ paddingTop: "64px" }}>
 
                     <Routes>
-                        <Route index element={<Administration />} />
-                        <Route path="/admin" element={<Administration />} />
-                        <Route path="*" element={<Administration />} />
+                        <Route index element={<NewWorkout />} />
+                        <Route path="/admin" element={<NewWorkout />} />
+                        <Route path="/new-workout" element={<NewWorkout />} />
+                        <Route path="/search" element={<Search />} />
+                        <Route path="*" element={<NewWorkout />} />
                     </Routes>
                 </main>
                 <Toaster duration={2000} position="top-right" />

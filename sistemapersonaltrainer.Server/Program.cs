@@ -66,6 +66,9 @@ builder.Services.AddScoped<IParameterService, ParameterService>();
 builder.Services.AddScoped<IWorkoutRepository, WorkoutRepository>();
 builder.Services.AddScoped<IWorkoutService, WorkoutService>();
 
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+
 
 //ADD CORS
 builder.Services.AddCors(options => options.AddPolicy("AllowWebApp",

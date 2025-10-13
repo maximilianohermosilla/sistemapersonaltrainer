@@ -6,7 +6,9 @@ export interface Workout {
     name: string
     description?: string
     customerId: number
-    userId: number
+    userId: number,
+    userName?: string,
+    createdAt: string
     customer: Customer
     workoutActivities: WorkoutActivity[]
 }

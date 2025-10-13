@@ -81,7 +81,7 @@ namespace sistemapersonaltrainer.Server.Responses.Services
 
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, vUserReadDTO.UserName),
+                    new Claim(ClaimTypes.NameIdentifier, vUserReadDTO.Id.ToString()),
                     new Claim(ClaimTypes.Name, $"{vUserReadDTO.Name} {vUserReadDTO.LastName}"),
                     new Claim(ClaimTypes.Role, "User")
                 };

@@ -6,6 +6,8 @@ namespace sistemapersonaltrainer.Server.Responses.Interfaces
     {
         Task<WorkoutReadDTO?> Create(WorkoutCreateDTO pWorkout);
         Task<IEnumerable<WorkoutReadDTO>> GetAll();
+        Task<IEnumerable<WorkoutReadDTO>> GetAllByUser(int userId);
+        Task<IEnumerable<WorkoutReadDTO>> GetAllByCustomer(string customer);
         Task<WorkoutReadDTO> Update(WorkoutCreateDTO pParameter);
         Task<WorkoutReadDTO?> GetById(int pId);
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sistemapersonaltrainer.Server.Data;
 
@@ -11,9 +12,11 @@ using sistemapersonaltrainer.Server.Data;
 namespace sistemapersonaltrainer.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251012231847_WorkoutDate")]
+    partial class WorkoutDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2310,9 +2313,6 @@ namespace sistemapersonaltrainer.Server.Migrations
                     b.Property<int?>("ExerciseId")
                         .HasColumnType("int");
 
-                    b.Property<string>("LongVideo")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -2325,9 +2325,6 @@ namespace sistemapersonaltrainer.Server.Migrations
 
                     b.Property<int?>("Series")
                         .HasColumnType("int");
-
-                    b.Property<string>("ShortVideo")
-                        .HasColumnType("longtext");
 
                     b.Property<int>("WorkoutActivityId")
                         .HasColumnType("int");

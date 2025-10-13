@@ -37,7 +37,11 @@ export default function FormWorkout({ onChangeWorkout }: FormWorkoutProps) {
 
     const removeWorkouts = () => {
         event?.preventDefault();
-        setQuantityWorkouts(quantityWorkouts > 1 ? quantityWorkouts - 1 : 1)
+        setQuantityWorkouts(quantityWorkouts > 1 ? quantityWorkouts - 1 : 1);
+
+        const workoutsActivitiesTemp = workoutsActivities.slice(0, quantityWorkouts-1);
+        setWorkoutsActivities(workoutsActivitiesTemp);
+        onChangeWorkout(workoutsActivitiesTemp);
     }
 
     const addWorkouts = () => {

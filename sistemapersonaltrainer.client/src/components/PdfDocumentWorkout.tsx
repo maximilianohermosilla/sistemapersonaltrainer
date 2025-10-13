@@ -47,8 +47,6 @@ const styles = StyleSheet.create({
 
 export default function PdfDocumentWorkout({ workoutActivity }: PdfDocumentoWorkoutProps) {
 
-    console.log(workoutActivity);
-
     return (
         <>
             <View key={workoutActivity.id} style={styles.view}>
@@ -60,7 +58,7 @@ export default function PdfDocumentWorkout({ workoutActivity }: PdfDocumentoWork
                     <Text style={styles.tableColumn3}>Descanso</Text>
                 </View>
 
-                {workoutActivity.exercises.map((exercise: any) => (
+                {workoutActivity.workoutActivityExercises.map((exercise: any) => (
                     <View key={exercise.id} style={styles.tableHeader}>
                         <Text style={styles.tableColumn}>{exercise.name}</Text>
                         <View style={[styles.tableColumn2, {flexDirection: "row", gap: "10px"}]}>
@@ -70,7 +68,7 @@ export default function PdfDocumentWorkout({ workoutActivity }: PdfDocumentoWork
                         </View>
                         <Text style={styles.tableColumn3}>{exercise.series || ''}</Text>
                         <Text style={styles.tableColumn3}>{exercise.repetitions || ''}</Text>
-                        <Text style={styles.tableColumn3}>{exercise.rest || ''}</Text>
+                        <Text style={styles.tableColumn3}>{exercise.restMinutes || ''}</Text>
                     </View>
                 ))}
             </View>
