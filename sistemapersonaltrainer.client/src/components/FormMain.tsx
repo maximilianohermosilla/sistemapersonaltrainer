@@ -135,7 +135,7 @@ export default function FormMain() {
             workoutActivities: workoutActivities
         }
 
-        const response = await CreateWorkout(workout);
+        await CreateWorkout(workout);
         window.location.reload()
     }
 
