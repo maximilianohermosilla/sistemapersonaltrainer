@@ -15,6 +15,7 @@ export default function FormWorkoutActivity({ index, selectedLanguage, exercises
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+        onChangeWorkoutActivity({ ...formData, [e.target.name]: e.target.value });
     };
 
     const removeExercise = () => {

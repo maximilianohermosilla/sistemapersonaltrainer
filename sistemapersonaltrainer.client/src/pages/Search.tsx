@@ -83,10 +83,10 @@ export default function Search() {
                                 <tbody className="text-xs md:text-sm border-1 border-gray-400">
                                     {workouts?.map((workout: any, index: number) => (
                                         <tr className="border-b-1 border-gray-400" key={index}>
-                                            <td className="text-start pl-1 border-r-1 border-gray-400">{workout.name}</td>
-                                            <td className="text-start pl-1 border-r-1 border-gray-400">{workout.customer?.firstName}</td>
-                                            <td className="text-start pl-1 border-r-1 border-gray-400">{formatDate(workout.createdAt)}</td>
-                                            <td className="text-center pl-1 border-r-1 border-gray-400">
+                                            <td className="text-start px-1 border-r-1 border-gray-400">{workout.name}</td>
+                                            <td className="text-start px-1 border-r-1 border-gray-400">{workout.customer?.firstName}</td>
+                                            <td className="text-start px-1 border-r-1 border-gray-400">{formatDate(workout.createdAt)}</td>
+                                            <td className="text-center px-1 border-r-1 border-gray-400">
                                                 <button className="text-xs text-red-800 hover:text-red-500" onClick={() => previewWorkout(workout)}>
                                                     <FaFilePdf />
                                                 </button>

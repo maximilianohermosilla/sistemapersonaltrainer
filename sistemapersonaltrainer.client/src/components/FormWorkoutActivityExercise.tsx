@@ -45,7 +45,7 @@ export default function FormWorkoutActivityExercise({ index, exercises, selected
                     className="flex gap-2 items-center border-1 border-secondary rounded-sm p-1 px-3 text-xs text-secondary hover:bg-blue-100">
                         <FaYoutube />Video 1</a>}
                 {exercise && exercise.urlShortVideo && <a href={`${exercise.urlShortVideo}`} target="_blank" rel="noopener noreferrer" 
-                    className="flex gap-2 items-center border-1 border-secondary rounded-sm p-1 px-3 text-xs text-secondary hover:bg-secondary">
+                    className="flex gap-2 items-center border-1 border-secondary rounded-sm p-1 px-3 text-xs text-secondary hover:bg-blue-100">
                         <FaYoutube />Video 2</a>}
             </div>
             <div className="flex justify-between items-center my-1 mb-3 gap-5">

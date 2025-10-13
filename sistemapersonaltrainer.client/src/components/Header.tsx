@@ -6,7 +6,6 @@ import { FaCartShopping } from "react-icons/fa6";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { BsPersonVcard, BsPersonVcardFill } from "react-icons/bs";
-import { GrContact } from "react-icons/gr";
 import { MdLogin, MdLogout } from "react-icons/md";
 import { CgGym } from "react-icons/cg";
 

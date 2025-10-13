@@ -17,6 +17,7 @@ import type { Workout } from "../interfaces/workout";
 import { formatDate } from "../utils/FormatDate";
 import { CreateWorkout } from "../services/workout-service";
 import Spinner from "./Spinner";
+import { dateToString } from "../utils/ParseDateUtil";
 
 export default function FormMain() {
     const [formData, setFormData] = useState<any>({ logo: '', name: '', email: '', whatsapp: '', customer: {}, workoutActivities: [], createdAt: new Date().toISOString() });
@@ -129,13 +130,13 @@ export default function FormMain() {
             customerId: customer?.id || 0,
             userId: 0,
             userName: '',
-            createdAt: new Date().toISOString(),
+            createdAt: dateToString(new Date()),
             customer: { id: 0, firstName: customer.name, lastName: '', phoneNumber: customer.whatsapp, documentNumber: '', email: customer.email, weight: 0, height: 0, imc: 0 },
             workoutActivities: workoutActivities
         }
 
         const response = await CreateWorkout(workout);
-        console.log(response);
+        window.location.reload()
     }
 
     return (

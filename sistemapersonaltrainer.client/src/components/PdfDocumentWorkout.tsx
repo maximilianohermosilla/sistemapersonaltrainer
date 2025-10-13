@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
         paddingBottom: "10px",
         paddingTop: "10px",
         marginLeft: "10px",
+        marginRight: "10px",
+        paddingRight: "10px",
         borderRight: "1px solid #e4e4e4",
     },
     tableColumn2: {
