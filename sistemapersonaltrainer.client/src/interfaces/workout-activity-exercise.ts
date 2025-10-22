@@ -5,6 +5,8 @@ export interface WorkoutActivityExercise {
     workoutActivityId: number
     exerciseId: number
     series?: number
+    seriesAproximation?: number
     repetitions?: number
     restMinutes?: number
+    weight?: number
 }

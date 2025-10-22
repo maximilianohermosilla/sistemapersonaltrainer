@@ -8,5 +8,6 @@ namespace sistemapersonaltrainer.Server.Data.Interfaces
         IEnumerable<Exercise> GetAll();
         Exercise GetById(int pId);
         Exercise Create(Exercise pExercise);
+        bool Delete(int pId);
     }
 }

@@ -8,5 +8,6 @@ namespace sistemapersonaltrainer.Server.Responses.Interfaces
         Task<IEnumerable<ExerciseReadDTO>> GetAll();
         Task<ExerciseReadDTO> Update(ExerciseCreateDTO pParameter);
         Task<ExerciseReadDTO?> GetById(int pId);
+        Task<bool> Delete(int pId);
     }
 }

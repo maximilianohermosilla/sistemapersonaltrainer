@@ -115,6 +115,8 @@ export default function FormMain() {
                         workoutActivityId: 0,
                         exerciseId: exercise.exerciseId,
                         series: Number(exercise.series || "0"),
+                        seriesAproximation: Number(exercise.seriesAproximation || "0"),
+                        weight: Number(exercise.weight || "0"),
                         repetitions: Number(exercise.repetitions || "0"),
                         restMinutes: Number(exercise.restMinutes || "0"),
                     }))

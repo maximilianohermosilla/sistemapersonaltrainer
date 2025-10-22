@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import NewWorkout from './pages/NewWorkout'
 import Search from './pages/Search'
+import Exercises from './pages/Exercises'
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                         <Route path="/admin" element={<NewWorkout />} />
                         <Route path="/new-workout" element={<NewWorkout />} />
                         <Route path="/search" element={<Search />} />
+                        <Route path="/exercises" element={<Exercises />} />
                         <Route path="*" element={<NewWorkout />} />
                     </Routes>
                 </main>

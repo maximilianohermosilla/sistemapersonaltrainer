@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         borderColor: "#e4e4e4"
     },
     tableColumn: {
-        width: "40%",
+        width: "20%",
         textAlign: "left",
         paddingBottom: "10px",
         paddingTop: "10px",
@@ -32,11 +32,10 @@ const styles = StyleSheet.create({
         textAlign: "left",
         paddingBottom: "10px",
         paddingTop: "10px",
-        marginLeft: "10px",
         borderRight: "1px solid #e4e4e4",
     },
     tableColumn3: {
-        width: "13%",
+        width: "12%",
         textAlign: "center",
         paddingBottom: "10px",
         paddingTop: "10px",
@@ -56,8 +55,10 @@ export default function PdfDocumentWorkout({ workoutActivity }: PdfDocumentoWork
                     <Text style={styles.tableColumn}>{workoutActivity.name}</Text>
                     <Text style={styles.tableColumn2}>Videos</Text>
                     <Text style={styles.tableColumn3}>Series</Text>
+                    <Text style={styles.tableColumn3}>Series Aprox</Text>
                     <Text style={styles.tableColumn3}>Repeticiones</Text>
                     <Text style={styles.tableColumn3}>Descanso</Text>
+                    <Text style={styles.tableColumn3}>Peso</Text>
                 </View>
 
                 {workoutActivity.workoutActivityExercises.map((exercise: any) => (
@@ -69,8 +70,10 @@ export default function PdfDocumentWorkout({ workoutActivity }: PdfDocumentoWork
                             {exercise.longVideo && <Link src={exercise.longVideo} style={styles.link}>Explicación</Link>}
                         </View>
                         <Text style={styles.tableColumn3}>{exercise.series || ''}</Text>
+                        <Text style={styles.tableColumn3}>{exercise.seriesAproximation || ''}</Text>
                         <Text style={styles.tableColumn3}>{exercise.repetitions || ''}</Text>
                         <Text style={styles.tableColumn3}>{exercise.restMinutes || ''}</Text>
+                        <Text style={styles.tableColumn3}>{exercise.weight || ''}</Text>
                     </View>
                 ))}
             </View>

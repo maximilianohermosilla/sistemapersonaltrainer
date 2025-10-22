@@ -67,5 +67,20 @@ namespace sistemapersonaltrainer.Server.Data.Repositories
                 .Include(e => e.ExerciseClassification)
                 .FirstOrDefault(e => e.Id == pId)!;
         }
+
+        public bool Delete(int pId)
+        {
+            var vExercise = GetById(pId);
+            if (vExercise == null)
+            {
+                return false;
+            }
+
+            vGblContext.Exercises.Remove(vExercise);
+            vGblContext.SaveChanges();
+
+            return true;
+
+        }
     }
 }

@@ -94,5 +94,25 @@ namespace sistemapersonaltrainer.Server.Controllers
                 return BadRequest(new ResponseMessage() { Message = ex.Message, Success = false });
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ExerciseReadDTO>> Delete(int id)
+        {
+            try
+            {
+                var vExerciseDeleted = await vGblService.Delete(id);
+
+                if (vExerciseDeleted == false)
+                {
+                    return NotFound(new ResponseMessage() { Message = "No se pudo eliminar el ejercicio", Success = false });
+                }
+
+                return Ok(new ResponseMessage() { Message = "Ejercicio eliminado exitosamente", Success = true });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseMessage() { Message = ex.Message, Success = false });
+            }
+        }
     }
 }

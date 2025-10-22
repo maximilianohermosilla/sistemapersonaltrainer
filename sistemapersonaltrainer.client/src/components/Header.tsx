@@ -8,6 +8,7 @@ import { FiMenu } from "react-icons/fi";
 import { BsPersonVcard, BsPersonVcardFill } from "react-icons/bs";
 import { MdLogin, MdLogout } from "react-icons/md";
 import { CgGym } from "react-icons/cg";
+import { LuClipboardList } from "react-icons/lu";
 
 const Header: React.FC = () => {
     const { isLoggedIn, logout } = useAuth();
@@ -59,12 +60,15 @@ const Header: React.FC = () => {
                         {isLoggedIn && <a href="/nuevo-entrenamiento" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-2 rounded-md">
                             <CgGym /> Nuevo Entrenamiento
                         </a>}
-                        {/* <a href="/contact" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-2 rounded-md">
-                            <GrContact /> Contacto
-                        </a> */}
+
                         <a href="/search" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-2 rounded-md">
                             <BsPersonVcard /> Entrenamientos
                         </a>
+
+                        {isLoggedIn && <a href="/exercises" className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-2 rounded-md">
+                            <LuClipboardList /> Ejercicios
+                        </a>}
+                        
                         {isLoggedIn 
                             ? <a onClick={handleLogout} 
                                 className="flex text-gray-100 hover:text-gray-500 hover:bg-gray-100 w-full gap-3 justify-start items-center py-2 pl-2 rounded-md cursor-pointer">

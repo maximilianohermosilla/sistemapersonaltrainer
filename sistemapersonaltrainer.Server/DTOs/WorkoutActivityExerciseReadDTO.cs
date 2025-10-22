@@ -8,6 +8,8 @@
         public int WorkoutActivityId { get; set; }
         public int? ExerciseId { get; set; }
         public int? Series { get; set; } = null!;
+        public int? SeriesAproximation { get; set; } = null!;
+        public int? Weight { get; set; } = null!;
         public int? Repetitions { get; set; } = null!;
         public int? RestMinutes{ get; set; } = null!;
         public string? ShortVideo { get; set; } = null!;

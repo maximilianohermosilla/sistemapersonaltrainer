@@ -5,23 +5,25 @@ import logo from "../assets/logo.png";
 import PdfDocument from "../components/PdfDocument";
 import { FaFilePdf } from "react-icons/fa6";
 import { useEffect, useState } from "react";
-import { GetAllWorkoutsByUser } from "../services/workout-service";
+import { GetAllWorkoutsByCustomer, GetAllWorkoutsByUser } from "../services/workout-service";
 import { GetParameterByKey } from "../services/parameter-service";
 import { ParameterEnum } from "../enums/parameter";
 import { formatDate } from "../utils/FormatDate";
+import { FaSearch } from "react-icons/fa";
 
 export default function Search() {
     const { isLoggedIn } = useAuth();
     const [workout, setWorkout] = useState<any>(null);
     const [workouts, setWorkouts] = useState<any[]>([]);
+    const [inputSearch, setInputSearch] = useState<string>('');
+    const [isSearch, setIsSearch] = useState<boolean>(false);
     const [formData, setFormData] = useState<any>({ logo: '', name: '', email: '', whatsapp: '', customer: {}, workoutActivities: [] });
 
     useEffect(() => {
         if (isLoggedIn) {
             getParameters();
             getAllWorkoutsByUser();
-        }
-        //setWorkouts([{ name: "Entrenamiento 1", customer: { name: "Cliente 1" }, createdAt: "2023-01-01" , workoutActivities: []}]);        
+        }   
     }, [isLoggedIn])
 
     const getParameters = async () => {
@@ -39,25 +41,47 @@ export default function Search() {
         })
     }
 
+    const handleSearchChange = (event: any) => {        
+        setInputSearch(event?.target?.value);
+    };
+
+    const handleSearch = () => {
+        setWorkout(undefined);
+        setWorkouts([]);
+        getParameters();
+        setIsSearch(true);
+        getAllWorkoutsByCustomer();
+    }
+
     const getAllWorkoutsByUser = async () => {
         const response = await GetAllWorkoutsByUser();
+        setWorkouts(response);
+    }
+
+    const getAllWorkoutsByCustomer = async () => {
+        const response = await GetAllWorkoutsByCustomer(inputSearch);
         setWorkouts(response);
     }
 
     const previewWorkout = (element: any) => {
         setWorkout(undefined);
         setTimeout(() => {
-            setWorkout({...element, logo: formData?.logo, name: formData?.name, email: formData?.email, whatsapp: formData?.whatsapp });            
+            setWorkout({ ...element, logo: formData?.logo, name: formData?.name, email: formData?.email, whatsapp: formData?.whatsapp });
         }, 300);
     }
 
     return (
-        <div className="main__container w-full flex flex-col justify-between">
-            {!isLoggedIn
-                ? <section className="flex flex-col justify-center items-center m-auto">
-                    <input type="text" placeholder="Buscar..." className="mx-auto w-200"></input>
+        <div className="main__container w-full flex flex-col">
+            {!isLoggedIn &&
+                <section className="flex flex-col justify-start items-center pt-3">
+                    <div className="flex gap-1">
+                        <input type="text" placeholder="Buscar..." className="mx-auto bg-white" value={inputSearch} onChange={handleSearchChange}></input>
+                        <button className="button__primary__outlined flex items-center gap-1 m-auto" onClick={handleSearch}><FaSearch /></button>
+                    </div>
                 </section>
-                : <section className="main__container flex flex-col justify-between h-fit">
+            }
+            {(isLoggedIn || isSearch) &&
+                <section className="flex flex-col justify-between h-fit">
                     <section className="w-full flex flex-col h-full p-3 gap-5">
                         {/* <input type="text" placeholder="Buscar..." className="mx-auto"></input> */}
                         <div className="flex flex-col md:flex-row justify-center gap-3 mx-auto">

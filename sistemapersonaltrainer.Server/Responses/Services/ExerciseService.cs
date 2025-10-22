@@ -58,6 +58,25 @@ namespace sistemapersonaltrainer.Server.Responses.Services
             }
         }
 
+        public async Task<bool> Delete(int pId)
+        {
+            try
+            {
+                var vExerciseDeleted = vGblRepository.Delete(pId);
+
+                if (!vExerciseDeleted)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public async Task<IEnumerable<ExerciseReadDTO>> GetAll()
         {
             try
